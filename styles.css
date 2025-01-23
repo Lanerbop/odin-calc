@@ -38,6 +38,7 @@ body {
     line-height: 4rem;
     padding: 1rem;
     border-bottom: 0.5rem solid rgb(29, 29, 29);
+    overflow: hidden;
 }
 
 button {

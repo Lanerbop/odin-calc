@@ -1,8 +1,9 @@
 // Calculator
 
-let num1;
+let num1 = undefined;
+let num2 = undefined;
 let operator;
-let num2;
+const CALC_NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 function add(num1, num2) {
     return num1 + num2;
@@ -39,3 +40,15 @@ function operate(num1, operator, num2) {
             throw new Error("Invalid operator!");
     }
 }
+
+const buttons = document.querySelectorAll("button");
+const screen = document.querySelector("#screen");
+
+const numberButtons = [];
+// Populate numberButtons
+for (let button of buttons) {
+    if (CALC_NUMBERS.includes(button.id)) {
+        numberButtons.push(button);
+    }
+}
+
