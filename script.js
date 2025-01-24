@@ -4,6 +4,7 @@ let num1 = undefined;
 let num2 = undefined;
 let operator = undefined;
 const CALC_NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const OPERATORS = ["+", "-", "*", "/"];
 const buttons = document.querySelectorAll("button");
 const screen = document.querySelector("#screen");
 const acButton = document.querySelector("#ac");
@@ -13,6 +14,14 @@ const numberButtons = [];
 for (let button of buttons) {
     if (CALC_NUMBERS.includes(button.id)) {
         numberButtons.push(button);
+    }
+}
+
+// Populate operatorButtons
+const operatorButtons = [];
+for (let button of buttons) {
+    if (OPERATORS.includes(button.id)) {
+        operatorButtons.push(button);
     }
 }
 
@@ -67,7 +76,7 @@ for (let button of numberButtons) {
     });
 }
 
-// on "AC" button, we clear the screen and set num1 and num2 to undefined
+// Clear the screen and set variables to undefined
 acButton.addEventListener("click", () => {
     screen.textContent = "";
     num1 = undefined;
@@ -75,6 +84,15 @@ acButton.addEventListener("click", () => {
     operator = undefined;
 });
 
+// Change the operator variable to the clicked button
+for (let button of operatorButtons) {
+    button.addEventListener("click", () => {
+        operator = button.id;
+        screen.textContent += operator;
+    });
+}
 
-// on operator button, we change the operator variable to the clicked button
-// on "=" button, we set num 1 to the result and set num2 & operator to undefined
+
+
+// on "=" button, we call the operate function,
+// set num 1 to the result and set num2 & operator to undefined
