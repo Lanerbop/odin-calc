@@ -2,7 +2,7 @@
 
 let num1 = undefined;
 let num2 = undefined;
-let operator;
+let operator = undefined;
 const CALC_NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 function add(num1, num2) {
@@ -52,3 +52,16 @@ for (let button of buttons) {
     }
 }
 
+for (let button of numberButtons) {
+    button.addEventListener("click", () => {
+        if (!operator) {
+            // Building num1
+            num1 = !num1 ? button.id : num1.concat(button.id);
+            screen.textContent = num1;
+        } else {
+            // Building num2
+            num2 = !num2 ? button.id : num2.concat(button.id);
+            screen.textContent = `${num1}${operator}${num2}`;
+        }
+    });
+}
