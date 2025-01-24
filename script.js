@@ -39,8 +39,8 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
-    if (num2 === 0) {
-        throw new Error("Cannot divide by zero!");
+    if (Number(num2) === 0) {
+        return screen.textContent = "Brah.";
     }
     return num1 / num2;
 }
@@ -88,8 +88,14 @@ acButton.addEventListener("click", () => {
 // Change the operator variable to the clicked button
 for (let button of operatorButtons) {
     button.addEventListener("click", () => {
-        operator = button.id;
-        screen.textContent += operator;
+        if (num2) {
+            operator = button.id;
+            screen.textContent = `${num1}${operator}${num2}`;
+        } else {
+        // num2 has not been set yet
+            operator = button.id;
+            screen.textContent = `${num1}${operator}`;
+        }
     });
 }
 
@@ -97,8 +103,12 @@ for (let button of operatorButtons) {
 // set num 1 to the result and set num2 & operator to undefined
 
 equalButton.addEventListener("click", () => {
-    screen.textContent = operate(operator);
-    num1 = screen.textContent;
-    num2 = undefined;
-    operator = undefined;
+    if (num1 && num2 && operator) {
+        screen.textContent = Math.round(operate(operator) * 100) / 100;
+        num1 = screen.textContent;
+        num2 = undefined;
+        operator = undefined;
+    } else {
+        throw new Error("Not all variables are defined.");
+    }
 });
