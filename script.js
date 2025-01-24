@@ -112,11 +112,12 @@ equalButton.addEventListener("click", () => {
 });
 
 decimalButton.addEventListener("click", () => {
-    if (num1 && operator && !num2.includes(".")) {
+    if (num1 && operator && !num2) {
+        num2 = "0.";
+        screen.textContent = `${num1}${operator}${num2}`;
+    } else if (num1 && operator && !num2.includes(".")) {
         num2 = num2.concat(".");
         screen.textContent = `${num1}${operator}${num2}`;
-    } else if (num2 && num2.includes(".")) {
-        // do nothing
     } else if (!num1) {
         num1 = "0.";
         screen.textContent = num1;
