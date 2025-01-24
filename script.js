@@ -9,6 +9,7 @@ const buttons = document.querySelectorAll("button");
 const screen = document.querySelector("#screen");
 const acButton = document.querySelector("#ac");
 const equalButton = document.querySelector("#equals");
+const decimalButton = document.querySelector("#decimal");
 
 // Populate numberButtons
 const numberButtons = [];
@@ -99,9 +100,6 @@ for (let button of operatorButtons) {
     });
 }
 
-// on "=" button, we call the operate function,
-// set num 1 to the result and set num2 & operator to undefined
-
 equalButton.addEventListener("click", () => {
     if (num1 && num2 && operator) {
         screen.textContent = Math.round(operate(operator) * 100) / 100;
@@ -110,5 +108,20 @@ equalButton.addEventListener("click", () => {
         operator = undefined;
     } else {
         throw new Error("Not all variables are defined.");
+    }
+});
+
+decimalButton.addEventListener("click", () => {
+    if (num1 && operator && !num2.includes(".")) {
+        num2 = num2.concat(".");
+        screen.textContent = `${num1}${operator}${num2}`;
+    } else if (num2 && num2.includes(".")) {
+        // do nothing
+    } else if (!num1) {
+        num1 = "0.";
+        screen.textContent = num1;
+    } else if (num1 && !operator && !num1.includes(".")) {
+        num1 = num1.concat(".");
+        screen.textContent = num1;
     }
 });
