@@ -8,6 +8,7 @@ const OPERATORS = ["+", "-", "*", "/"];
 const buttons = document.querySelectorAll("button");
 const screen = document.querySelector("#screen");
 const acButton = document.querySelector("#ac");
+const equalButton = document.querySelector("#equals");
 
 // Populate numberButtons
 const numberButtons = [];
@@ -44,7 +45,7 @@ function divide(num1, num2) {
     return num1 / num2;
 }
 
-function operate(num1, operator, num2) {
+function operate() {
     num1 = Number(num1);
     num2 = Number(num2);
     switch (operator) {
@@ -92,7 +93,12 @@ for (let button of operatorButtons) {
     });
 }
 
-
-
 // on "=" button, we call the operate function,
 // set num 1 to the result and set num2 & operator to undefined
+
+equalButton.addEventListener("click", () => {
+    screen.textContent = operate(operator);
+    num1 = screen.textContent;
+    num2 = undefined;
+    operator = undefined;
+});
